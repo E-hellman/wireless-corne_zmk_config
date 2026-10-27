@@ -14,8 +14,8 @@
  *            (all the TIMING settings you might want to tune live here)
  *    PART 3  The six layers ... each one has a picture of the keyboard above it
  *              Layer 0  BASE   letters, always on
- *              Layer 1  NAV    hold the left 1.5u thumb   (arrows, editing)
- *              Layer 2  NUM    hold the left middle thumb (numpad)
+ *              Layer 1  NAV    hold the left middle thumb (arrows, editing)
+ *              Layer 2  NUM    hold the left outer thumb  (numpad)
  *              Layer 3  SYM    hold Enter                 (all symbols)
  *              Layer 4  FN     hold Fn, bottom-left       (F-keys, Bluetooth)
  *              Layer 5  MEDIA  hold Media, bottom-right   (volume, brightness)
@@ -207,8 +207,9 @@
            (GACS order: Win, Alt, Ctrl, Shift from pinky to index).
            A12 Lock = Win+L. B12 Super = Win key. C11 Caps = Caps Word / Lock.
            C1 Fn and C12 Media switch layers while held.
-           Thumbs, left→right: Space · Num · Nav | Enter(hold=Sym) · Bksp · Del
-           (Space is on the outer thumb, which is easier to reach with big hands.) */
+           Thumbs, left→right: Num · Nav · Space | Enter(hold=Sym) · Bksp · Del
+           (Space is on the 1.5u key nearest the split, the most comfortable
+           thumb position for big hands; Nav moved to the middle key.) */
         base_layer {
             display-name = "Base";
 /* ╭────────┬────────┬────────┬────────┬────────┬────────╮   ╭────────┬────────┬────────┬────────┬────────┬────────╮
@@ -216,31 +217,31 @@
    │  Tab   │ A/Win  │ S/Alt  │ D/Ctrl │ F/Shft │   G    │   │   H    │ J/Shft │ K/Ctrl │ L/Alt  │ '/Win  │ Super  │
    │   Fn   │   Z    │   X    │   C    │   V    │   B    │   │   N    │   M    │   ,    │   .    │  Caps  │ Media  │
    ╰────────┴────────┴────────┼────────┼────────┼────────┤   ├────────┼────────┼────────┼────────┴────────┴────────╯
-                              │ Space  │  Num   │  Nav   │   │Ent/Sym │  Bksp  │  Del   │
+                              │  Num   │  Nav   │ Space  │   │Ent/Sym │  Bksp  │  Del   │
                               ╰────────┴────────┴────────╯   ╰────────┴────────┴────────╯ */
             bindings = <
     &kp ESC   &kp Q          &kp W          &kp E           &kp R           &kp T        &kp Y   &kp U        &kp I           &kp O          &kp P          &kp W_LOCK
     &kp TAB   &hml LGUI A    &hml LALT S    &hml LCTRL D    &hsl LSHFT F    &kp G        &kp H   &hsr RSHFT J &hmr RCTRL K    &hmr LALT L    &hmr RGUI SQT  &kp LGUI
     &mo FN    &kp Z          &kp X          &kp C           &kp V           &kp B        &kp N   &kp M        &kp COMMA       &kp DOT        &td_caps       &mo MEDIA
-                                            &kp SPACE       &mo NUM         &mo NAV      &lt_sym SYM ENTER    &kp BSPC        &kp DEL
+                                            &mo NUM         &mo NAV         &kp SPACE    &lt_sym SYM ENTER    &kp BSPC        &kp DEL
             >;
         };
 
         /* ── LAYER 1 · NAV ───────────────────────────────────────────────────
-           Held with the left 1.5u thumb. Left hand = arrows and editing,
+           Held with the left middle thumb. Left hand = arrows and editing,
            right hand = clipboard + plain modifiers (no hold needed here), so
            Shift+arrows selects text and Ctrl+arrows jumps by word.
            Mute is on Q; volume and brightness live on the MEDIA layer.
            Z = paste as plain text, C = Windows clipboard history (Win+V). */
         nav_layer {
             display-name = "Nav";
-/* hold the left 1.5u thumb
+/* hold the left middle thumb
    ╭────────┬────────┬────────┬────────┬────────┬────────╮   ╭────────┬────────┬────────┬────────┬────────┬────────╮
    │        │  Mute  │  Home  │   ↑    │  End   │  Tab   │   │  Copy  │        │        │        │        │        │
    │        │  Find  │   ←    │   ↓    │   →    │  PgUp  │   │ Paste  │ Shift  │  Ctrl  │  Alt   │  Win   │        │
    │        │ Plain  │  Undo  │ Clips  │  Redo  │  PgDn  │   │  Cut   │        │        │        │        │        │
    ╰────────┴────────┴────────┼────────┼────────┼────────┤   ├────────┼────────┼────────┼────────┴────────┴────────╯
-                              │        │        │ (held) │   │        │        │        │
+                              │        │ (held) │        │   │        │        │        │
                               ╰────────┴────────┴────────╯   ╰────────┴────────┴────────╯ */
             bindings = <
     &trans    &kp C_MUTE     &kp HOME       &kp UP          &kp END         &kp TAB      &kp W_COPY   &trans       &trans          &trans         &trans         &trans
@@ -251,13 +252,13 @@
         };
 
         /* ── LAYER 2 · NUM ───────────────────────────────────────────────────
-           Held with the left middle thumb. Numpad on the right hand.
+           Held with the left outer thumb. Numpad on the right hand.
            The math keys on the left (/ ( ) = -) and + on B11 sit exactly where
            those symbols are printed for the SYM layer, so the legends match.
            The keys shown blank keep their base-layer job (&trans). */
         num_layer {
             display-name = "Num";
-/* hold the left middle thumb. Left-hand math keys sit where the same symbols
+/* hold the left outer thumb. Left-hand math keys sit where the same symbols
    are printed for the symbol layer, so one legend serves both layers.
    * on P is the one unprinted extra (top right, like a numpad).
    ╭────────┬────────┬────────┬────────┬────────┬────────╮   ╭────────┬────────┬────────┬────────┬────────┬────────╮
@@ -265,7 +266,7 @@
    │        │        │   =    │        │   -    │        │   │   0    │   4    │   5    │   6    │   +    │        │
    │        │        │        │        │        │        │   │   .    │   1    │   2    │   3    │        │        │
    ╰────────┴────────┴────────┼────────┼────────┼────────┤   ├────────┼────────┼────────┼────────┴────────┴────────╯
-                              │        │ (held) │        │   │        │        │        │
+                              │ (held) │        │        │   │        │        │        │
                               ╰────────┴────────┴────────╯   ╰────────┴────────┴────────╯ */
             bindings = <
     &trans    &trans         &kp FSLH       &kp LPAR        &kp RPAR        &trans       &trans     &kp N7       &kp N8          &kp N9         &kp STAR       &trans
@@ -334,13 +335,13 @@
    │        │        │ Bri −  │ Vol −  │ Bri +  │        │   │        │        │        │        │        │        │
    │        │        │        │        │        │        │   │        │        │        │        │        │ (held) │
    ╰────────┴────────┴────────┼────────┼────────┼────────┤   ├────────┼────────┼────────┼────────┴────────┴────────╯
-                              │Play/Pa │        │        │   │        │        │        │
+                              │        │        │Play/Pa │   │        │        │        │
                               ╰────────┴────────┴────────╯   ╰────────┴────────┴────────╯ */
             bindings = <
     &trans    &kp C_MUTE     &kp C_PREV     &kp C_VOL_UP    &kp C_NEXT      &trans       &trans     &trans       &trans          &trans         &trans         &trans
     &trans    &trans         &kp C_BRI_DEC  &kp C_VOL_DN    &kp C_BRI_INC   &trans       &trans     &trans       &trans          &trans         &trans         &trans
     &trans    &trans         &trans         &trans          &trans          &trans       &trans     &trans       &trans          &trans         &trans         &trans
-                                            &kp C_PP        &trans          &trans       &trans                  &trans          &trans
+                                            &trans          &trans          &kp C_PP     &trans                  &trans          &trans
             >;
         };
     };
