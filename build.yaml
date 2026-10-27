@@ -1,10 +1,15 @@
+# Builds the two firmware files for the Klimt Corne:
+#   blecorne_left  → flash onto the LEFT half
+#   blecorne_right → flash onto the RIGHT half
+# (Bluetooth "settings reset" builds removed to avoid mix-ups. If you ever need
+#  them again, add these back:
+#  - board: blecorne_left
+#    shield: settings_reset
+#  - board: blecorne_right
+#    shield: settings_reset )
 ---
 include:
   - board: blecorne_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: blecorne_right
-  - board: blecorne_left
-    shield: settings_reset
-  - board: blecorne_right
-    shield: settings_reset
